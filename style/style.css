@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --lg-font: 'Kaisei Tokumin', serif;
+    --sm-font: 'Poppins', sans-serif;
+    --red: #cc2c2c;
+    --beige: #a6a677;
+}
+
+body{
+    font-family: var(--sm-font);
+}
+/*button*/
+.bg-primary {
+    background-color: var(--red)!important;
+}
+
+.btn:not(.nav-btns button){
+    background-color: white;
+    color: rgb(85, 85, 85);
+    padding: 10px 28px;
+    border-radius: 25px;
+    border: 1px solid rgb(85, 85, 85);
+}
+.btn:not(.nav-btns button):hover{
+    background-color: var(--red);
+    color: white;
+    border-color: var(--red);
+}
+
+/*text color*/
+.text-primary{
+    color: var(--red)!important;
+}
+
+
+/*navbar*/
+.logo {
+    width: 40px;
+}
+
+.navbar {
+    box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand span {
+    letter-spacing: 2px;
+    font-family: var(--lg-font);
+}
+
+.nav-link:hover{
+    color: var(--red)!important;
+}
+
+.nav-item {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.5) ;
+}
+
+/*header*/
+
+#header {
+    background: url(../img/header.avif) top/cover no-repeat;
+}
+
+.carousel-inner h1 {
+    font-size: 60px;
+    font-family: var(--lg-font);
+}
+.carousel-item .btn {
+    border-color: white!important;
+}
+
+.carousel-item .btn:hover {
+    border-color: var(--red)!important;
+}
+
+
+/*title*/
+.title h2::before {
+    position: absolute;
+    content: "";
+    width: 4px;
+    height: 50px;
+    background-color: var(--red);
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/*collection*/
+.active-filter-btn {
+    background-color: var(--red)!important;
+    color: white!important;
+    border-color: var(--red)!important;
+}
+
+.collection-img span {
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+
+
+/*footer*/
+
+footer .brand {
+    font-family: var(--lg-font);
+    letter-spacing: 2px;
+}
+
+.bg-dark {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+#facebook:hover {
+    color: #09098f;
+}
+#twitter:hover {
+    color: #0093ff;
+}
+#instagram:hover {
+    color: #a667ae;
+}
+#pinterest:hover {
+    color: #a60909;
+}
+/*icons*/
+
+.ico {
+    color: black;
+}
+
+/*register*/
+.box-area {
+    width: 480px;
+}
+.body {
+    background-color: #ccc8c8;
+}
+
+/*shopping card*/
+.card-body {
+    font-size: 10px;
+}
+/* counter */
+.qty .count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px
+;min-width: 35px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+}
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+div {
+    text-align: center;
+}
+.minus:hover{
+    background-color: #a6a677 !important;
+}
+.plus:hover{
+    background-color: #a6a677 !important;
+}
+/*Prevent text selection*/
+span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+input{
+    border: 0;
+    width: 2%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input:disabled{
+    background-color:white;
+}
+
+.qty {
+    font-size: 15px;
+}
+
+
+/*media queries*/
+
+@media(min-width: 992px){
+    .nav-item{
+        border-bottom: none;
+    }
+}

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Shopping</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!--    fontaweosme cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!--    bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+<!--    navbar-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+    <div class="container">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="#">
+            <img id="logo" class="logo" src="./img/logo.png" alt="logo">
+            <span class="text-uppercase fw-lighter ms-2 pos">SELIN</span>
+        </a>
+        <div class="order-lg-2 nav-btns">
+            <button type="button" class="btn position-relative">
+                <a href="cart.html" class="ico"><i class="fa-solid fa-bag-shopping"></i></a>
+            </button>
+
+            <button type="button" class="btn position-relative">
+                <a href="login.html" class="ico"> <i class="fa-solid fa-user"></i> </a>
+            </button>
+            <button id="logoutButton" type="button" class="btn position-relative" style="display: none;"
+                    onclick="isLoggedIn()">
+                <i class="fa-solid fa-sign-out-alt"></i>
+            </button>
+        </div>
+
+        <button class="navbar-toggler border-0 " type="button" data-bs-toggle="collapse"
+                data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+            <ul class="navbar-nav mx-auto text-center">
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase" href="#header">home</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase" href="#collection">products</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase" href="#blogs">blogs</a>
+                </li>
+                <li class="nav-item px-2 py-2 ">
+                    <a class="nav-link text-uppercase" href="#about">about us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--end of navbar-->
+
+<!--header-->
+<header id="header" class="vh-100 carousel slide" data-bs-ride="carousel"
+        style="padding-top: 104px;">
+    <div class="container h-100 d-flex align-items-center carousel-inner">
+        <div class="text-center carousel-item active">
+            <h2 class="text-capitalize text-white">
+                The Best Quality
+            </h2>
+            <h1 class="text-uppercase py-2 fw-bold text-white">T-shirts For Women</h1>
+            <a href="#" class="btn mt-3 text-uppercase">shop now</a>
+        </div>
+        <div class="text-center carousel-item">
+            <h2 class="text-capitalize text-white">
+                The Best Quality
+            </h2>
+            <h1 class="text-uppercase py-2 fw-bold text-white">T-shirts For Men</h1>
+            <a href="#" class="btn mt-3 text-uppercase">shop now</a>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#header"
+            data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#header"
+            data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</header>
+<!--end of header-->
+
+<!--collection-->
+<section id="collection" class="py-5 ">
+    <div class="container">
+        <div class="title text-center">
+            <h2 class="position-relative d-inline-block"> Products </h2>
+        </div>
+
+        <div id="products-container" class="row g-0">
+            <div class="d-flex flex-wrap justify-content-center mt-5">
+                <button type="button" class="btn m-2 text-dark active-filter-btn">All</button>
+                <button id="womanbtn" type="button" class="btn m-2 text-dark">Woman</button>
+                <button id="manbtn" type="button" class="btn m-2 text-dark">Man</button>
+                <button id="kidsbtn" type="button" class="btn m-2 text-dark">Kids</button>
+            </div>
+
+            <div class="collection-list mt-4 row gx-0 gy-3">
+                <div id="products" class="container d-flex justify-content-center">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!--end of collection-->
+
+<!--blogs-->
+
+<section id="blogs" class="py-5">
+    <div class="container">
+        <div class="title text-center py-5">
+            <h2 class="position-relative d-inline-block">
+                Blogs
+            </h2>
+        </div>
+
+        <div class="row g-3">
+            <div class="card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                <img src="./img/blog.jpeg" alt="">
+                <div class="card-body px-0">
+                    <h4 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </h4>
+                    <p class="card-text mt-3 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Architecto dicta, distinctio eos harum itaque iusto, mollitia nulla officiis
+                        quidem, repellat reprehenderit sint tempore veniam. Doloremque eos
+                        est excepturi iure libero modi, neque odio saepe tempora! Lorem ipsum dolor.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <span class="">Author: </span> Anonymous
+                        </small>
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+
+            <div class="card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                <img src="./img/blog.jpeg" alt="">
+                <div class="card-body px-0">
+                    <h4 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </h4>
+                    <p class="card-text mt-3 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Architecto dicta, distinctio eos harum itaque iusto, mollitia nulla officiis
+                        quidem, repellat reprehenderit sint tempore veniam. Doloremque eos
+                        est excepturi iure libero modi, neque odio saepe tempora! Lorem ipsum dolor.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <span class="">Author: </span> Anonymous
+                        </small>
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+
+            <div class="card border-0 col-md-6 col-lg-4 bg-transparent my-3">
+                <img src="./img/blog.jpeg" alt="">
+                <div class="card-body px-0">
+                    <h4 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </h4>
+                    <p class="card-text mt-3 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Architecto dicta, distinctio eos harum itaque iusto, mollitia nulla officiis
+                        quidem, repellat reprehenderit sint tempore veniam. Doloremque eos
+                        est excepturi iure libero modi, neque odio saepe tempora! Lorem ipsum dolor.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <span class="">Author: </span> Anonymous
+                        </small>
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end of blogs-->
+
+<!--about us-->
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row gy-lg-5 align-items-center">
+            <div class="col-lg-6 order-lg-1 text-center text-lg-start">
+                <div class="title pt-3 pb-5">
+                    <h2 class="position-relative d-inline-block ms-4">
+                        About Us
+                    </h2>
+                </div>
+                <p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Autem cupiditate ducimus reiciendis?
+                </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At corporis
+                    cum dignissimos dolore facere fugit, ipsa maiores minus molestias tenetur?
+                    Ab asperiores commodi consequatur consequuntur cumque delectus dolor dolorem
+                    earum fugit nobis nostrum obcaecati placeat provident quaerat,
+                    quos repellat repudiandae sit vel vero vitae voluptatum?</p>
+            </div>
+            <div class="col-lg-6 order-lg-0">
+                <img src="./img/about.jpeg" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--en of about us-->
+
+
+<!--footer-->
+
+<footer class="bg-dark py-5">
+    <div class="container">
+        <div class="row text-white g-4">
+            <div class="col-md-6 col-lg-3">
+                <a class="text-uppercase text-decoration-none brand
+                 text-white" href="index.html">Selin</a>
+                <p class="text-white text-muted mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing
+                    elit. Accusantium atque debitis illo!</p>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <h5 class="fw-light">Links</h5>
+                <ul class="list-unstyled">
+                    <li class="my-3">
+                        <a class="text-white text-decoration-none text-muted" href="index.html">
+                            <i class="fa-solid fa-angle-right me-1">
+                            </i>Home
+                        </a>
+                    </li>
+                    <li class="my-3">
+                        <a class="text-white text-decoration-none text-muted" href="#collection">
+                            <i class="fa-solid fa-angle-right me-1">
+                            </i>Products
+                        </a>
+                    </li>
+                    <li class="my-3">
+                        <a class="text-white text-decoration-none text-muted" href="#blogs">
+                            <i class="fa-solid fa-angle-right me-1">
+                            </i>Blogs
+                        </a>
+                    </li>
+                    <li class="my-3">
+                        <a class="text-white text-decoration-none text-muted" href="#about">
+                            <i class="fa-solid fa-angle-right me-1">
+                            </i>About Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <h5 class="fw-light mb-3"> Contact Us</h5>
+                <div class="d-flex justify-content-start align-items-start
+                 my-2 text-muted">
+                    <span class="me-3">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </span>
+                    <span class="fw-light">
+                        Istanbul, Cekmekoy
+                    </span>
+                </div>
+                <div class="d-flex justify-content-start align-items-start
+                 my-2 text-muted">
+                    <span class="me-3">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="fw-light">
+                        tshirt@gmail.com
+                    </span>
+                </div>
+                <div class="d-flex justify-content-start align-items-start
+                 my-2 text-muted">
+                    <span class="me-3">
+                        <i class="fas fa-phone-alt"></i>
+                    </span>
+                    <span class="fw-light">
+                        +90000000000
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <h5 class="fw-light mb-3">Follow Us</h5>
+                <div>
+                    <ul class="list-unstyled d-flex">
+                        <li>
+                            <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                <i class="fab fa-facebook-f" id="facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                <i class="fab fa-twitter" id="twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                <i class="fab fa-instagram" id="instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                <i class="fab fa-pinterest" id="pinterest"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--end of footer-->
+
+
+<!--bootstrap js-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+<script src="./node_modules/jquery/dist/jquery.js" type="application/javascript"></script>
+<script src="./script/script.js" type="application/javascript"></script>
+</html>
