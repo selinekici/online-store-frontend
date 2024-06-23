@@ -1,4 +1,3 @@
-
 $(function () {
     var $products = $('#products');
     $.ajax({
@@ -9,12 +8,28 @@ $(function () {
             $.each(products, function (i, product) {
                 var contDiv = $('<div id="' + product._id + '">');
                 $(contDiv).click(function () {
-                        console.log('click');
                         var prodDetail = $('<div>  </div>');
                         var descriptionDiv = $('<div>  </div>').append('<strong>' + product.name + ' <small><br> ' + product.details + ' <br><strong>  ' +
                             '$' + product.price + '<small><br> Manifacturer: ' + product.manufacturer);
                         $(product.name).css('font-size', '30px');
-                        var btn = $('<button> Add Card </button>');
+                        var btn = $('<button> Add Cart </button>').click(function () {
+                            let cartId = getUserId();
+                            let quantity = 1;
+                            $.ajax({
+                                type: 'POST',
+                                url: 'http://localhost:8001/cart/' + cartId,
+                                data: JSON.stringify({productId: product._id, quantity: quantity}),
+                                contentType: "application/json",
+                                dataType: 'json',
+                                success: function (response) {
+                                    alert("Your order is in the shopping cart.");
+                                },
+                                error: function (xhr, status, error) {
+                                    var errorMessage = xhr.responseJSON.message;
+                                    alert(errorMessage);
+                                }
+                            });
+                        });
                         var id = contDiv.attr('id');
                         $.ajax({
                             type: 'GET',
@@ -64,6 +79,7 @@ $(function () {
     });
 });
 
+
 $('#products').css("flex-wrap", "wrap");
 
 //register
@@ -107,7 +123,7 @@ $('#loginButton').click(function () {
         dataType: 'json',
         success: function (response) {
             alert("You are in the account successfully!!");
-            setData('user', JSON.stringify({email:email, isLoggedIn:true}));
+            setData('user', JSON.stringify({email: email, _id: response._id, isLoggedIn: true}));
             console.log('getData:' + JSON.parse(getData('user')));
             window.location.href = "index.html";
 
@@ -122,12 +138,12 @@ $('#loginButton').click(function () {
 
 $('#logoutButton').click(function () {
     var email = getEmail();
-    if(email){
+    if (email) {
         console.log('logout clicked');
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8001/logout',
-            data: JSON.stringify({email:email}),
+            data: JSON.stringify({email: email}),
             contentType: "application/json",
             dataType: 'json',
             success: function (response) {
@@ -135,8 +151,8 @@ $('#logoutButton').click(function () {
                 window.location.href = "index.html";
             },
             error: function (xhr, status, error) {
-                console.log('errors: '+status);
-                console.log('errors: '+error);
+                console.log('errors: ' + status);
+                console.log('errors: ' + error);
             }
         });
     }
@@ -144,13 +160,13 @@ $('#logoutButton').click(function () {
 
 $(document).ready(isLoggedIn);
 
-function isLoggedIn(){
+function isLoggedIn() {
     var user = getData('user');
     console.log('user: ' + user);
 
-    if(user) {
+    if (user) {
         user = JSON.parse(user);
-        if (user.isLoggedIn){
+        if (user.isLoggedIn) {
             $('#logoutButton').show();
         }
 
@@ -159,13 +175,26 @@ function isLoggedIn(){
     }
 }
 
-function getEmail(){
+function getEmail() {
     var user = getData('user');
     console.log('user: ' + user);
 
-    if(user) {
+    if (user) {
         user = JSON.parse(user);
         return user.email;
+
+    } else {
+        return null;
+    }
+}
+
+function getUserId() {
+    var user = getData('user');
+    console.log('user: ' + user);
+
+    if (user) {
+        user = JSON.parse(user);
+        return user._id;
 
     } else {
         return null;
@@ -254,7 +283,24 @@ function processProducts(products) {
                 var descriptionDiv = $('<div>  </div>').append('<strong>' + product.name + ' <small><br> ' + product.details + ' <br><strong>  ' +
                     '$' + product.price + '<small><br> Manifacturer: ' + product.manufacturer);
                 $(product.name).css('font-size', '30px');
-                // var btn = $('<button> Add Card </button>');
+                var btn = $('<button> Add Card </button>').click(function () {
+                    let cartId = getUserId();
+                    let quantity = 1;
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost:8001/cart/' + cartId,
+                        data: JSON.stringify({productId: product._id, quantity: quantity}),
+                        contentType: "application/json",
+                        dataType: 'json',
+                        success: function (response) {
+                            alert("Your order is in the shopping cart.");
+                        },
+                        error: function (xhr, status, error) {
+                            var errorMessage = xhr.responseJSON.message;
+                            alert(errorMessage);
+                        }
+                    });
+                });
                 var id = contDiv.attr('id');
                 $.ajax({
                     type: 'GET',
@@ -301,3 +347,85 @@ function processProducts(products) {
 
     });
 }
+
+
+
+$('#shopping-cart').click(function () {
+    var body = $('#body').empty();
+    var cart = $('#body').append('<div> <br><br><br><br><br><br><br> </div>');
+    body.append(cart);
+    console.log("clicked");
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8001/cart/' + getUserId(),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (response) {
+            const products = response.products;
+            console.log("products: " + JSON.stringify(products));
+            let productsIds = $.map(products, function (val, i) {
+                return val.productId;
+            })
+            console.log("productIds: "+ productsIds);
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8001/products-by-ids',
+                data: JSON.stringify(productsIds),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (productDetails) {
+                    let totalPrice = 0;
+                    console.log("produc detaul:" + JSON.stringify(productDetails));
+                    $.each(products, function (i, product) {
+                        console.log("productid:" +product._id);
+                       let productDetail ;
+                       for (let i = 0; i < productDetails.length; i++){
+                           if(productDetails[i]._id === product.productId){
+                               productDetail = productDetails[i];
+                               console.log("found productDetail" + productDetail);
+                               break;
+                           }
+                       }
+                       console.log("productDetail: "+ productDetail);
+                        var containerDiv = $('<div id="' + product._id + '"> </div>');
+                        var img = $('<img>').attr({
+                            src: productDetail.imageUrl,
+                            width: 150, // Set the image width
+                            height: 150 // Set the image height
+                        });
+
+                        containerDiv.append(img);
+                        var descriptionDiv = $('<div>  </div>').append('<strong>' + productDetail.name + ' <small><br> ' + productDetail.details + ' <br><strong>  ' +
+                            '$' + productDetail.price + '<br>' + 'quantity: ' + product.quantity);
+                        var removeButton = $('<button id="' + product.productId +' "> remove </button>');
+                        $(removeButton).click(function () {
+                            let id = removeButton.attr('id');
+                            $.ajax({
+                                type: 'DELETE',
+                                url: 'http://localhost:8001/cart/remove-product/' + getUserId() + '/' + id,
+                                contentType: "application/json",
+                                dataType: 'json',
+                                success: function () {
+                                    $('#shopping-cart').trigger("click");
+                                }
+                            });
+                        });
+                        containerDiv.append(descriptionDiv);
+                        cart.append(containerDiv);
+                        cart.append(removeButton);
+                        totalPrice += productDetail.price * product.quantity;
+                    });
+                    let total = $('<div> Total Price: '+ totalPrice + '</div>');
+                    cart.append(total);
+                }
+
+            })
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = xhr.responseJSON.message;
+            console.log("ERROR");
+            alert(errorMessage);
+        }
+    });
+});
